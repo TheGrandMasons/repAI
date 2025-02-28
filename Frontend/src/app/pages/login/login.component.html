@@ -1,31 +1,40 @@
-<!-- login.component.html -->
-<div class="login-container">
-  <div class="login-card">
-    <div class="logo">
-      <img src="assets/images/logo.svg" alt="EcoWallet Logo">
-      <h1>EcoWallet</h1>
-    </div>
 
-    <div class="description">
-      <p>Turn your recycling into real value with AI-powered analysis</p>
-    </div>
-
-    <div class="actions">
-      <button 
-        [disabled]="loading" 
-        (click)="signInWithGoogle()" 
-        class="google-button">
-        <img src="assets/images/google-icon.svg" alt="Google">
-        <span>Continue with Google</span>
-      </button>
-
-      <div *ngIf="loginError" class="error-message">
-        {{ loginError }}
+ <div class="landing-container" [class.dark-mode]="isDarkMode">
+  <header class="header">
+    <div class="logo">Repai</div>
+    <nav class="navigation">
+      <div class="dropdown">
+        <button class="dropdown-toggle" (click)="toggleDropdown()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </button>
+        <div class="dropdown-menu" [class.show]="isDropdownOpen" (clickOutside)="closeDropdown()">
+          <a href="https://github.com/TheGrandMasons/NeuraPay" target="_blank" class="dropdown-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Community
+          </a>
+          <button class="dropdown-item darkmodebtn" (click)="toggleDarkMode()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            Dark Mode
+          </button>
+        </div>
       </div>
-    </div>
+    </nav>
+  </header>
 
-    <div class="terms">
-      <p>By signing in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
-    </div>
-  </div>
+  <main class="main-content">
+    <section class="hero">
+      <h1 class="main-heading">Scan, Recycle, Cash In</h1>
+      <h2 class="sub-heading">Saving the Planet Pays Off</h2>
+
+      <div class="cta-buttons">
+        <button class="btn btn-primary google-button"[disabled]="loading" (click)="signInWithGoogle()">Get Started</button>
+        <!-- <button class="btn btn-secondary" (click)="onSignupClick()">Sign up</button> -->
+      </div>
+
+      <div class="hero-image">
+        <img src="/images/repai.png" alt="Recycling illustration"
+             aria-label="Image showing recycling process">
+      </div>
+    </section>
+  </main>
 </div>
