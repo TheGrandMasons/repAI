@@ -1,64 +1,40 @@
-<div class="home">
-  <header>
-      <div class="logo">Repai</div>
-      <div class="user">
-          <div class="username">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-at-sign"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
-            <span class="username-text">{{username}}</span>
-          </div>
-          <div class="more-options" (click)="toggleMenu()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-          </div>
+
+<div class="landing-container" [class.dark-mode]="isDarkMode">
+  <header class="header">
+    <div class="logo">Repai</div>
+    <nav class="navigation">
+      <div class="dropdown">
+        <button class="dropdown-toggle" (click)="toggleDropdown()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </button>
+        <div class="dropdown-menu" [class.show]="isDropdownOpen" (clickOutside)="closeDropdown()">
+          <a href="https://github.com/TheGrandMasons/NeuraPay" target="_blank" class="dropdown-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Community
+          </a>
+          <button class="dropdown-item darkmodebtn" (click)="toggleDarkMode()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            Dark Mode
+          </button>
+        </div>
       </div>
+    </nav>
   </header>
 
-  <div class="mobile-menu" [class.show]="menuOpen">
-    <div class="mobile-menu-item" style="color: red;">Logout</div>
-  </div>
+  <main class="main-content">
+    <section class="hero">
+      <h1 class="main-heading">Scan, Recycle, Cash In</h1>
+      <h2 class="sub-heading">Saving the Planet Pays Off</h2>
 
-  <div class="container">
-    <div class="balance-container">
-        <div><span>EGP</span> {{balance}} </div>
-    </div>
+      <div class="cta-buttons">
+        <button class="btn btn-primary google-button"[disabled]="loading" (click)="signInWithGoogle()">Get Started</button>
+        <!-- <button class="btn btn-secondary" (click)="onSignupClick()">Sign up</button> -->
+      </div>
 
-    <div class="features">
-        <div class="feature">
-            <div class="feature-icon scanner" (click)="navigateToScanner()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scan-line"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>
-            </div>
-            <div class="feature-name">scanner</div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="black" stroke-width="2"/>
-                    <path d="M12 7V12L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="feature-name">History</div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 9.5L6 17" stroke="black" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M12 7L12 17" stroke="black" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M18 12L18 17" stroke="black" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="feature-name">insights</div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 20C20 16.6863 16.4183 14 12 14C7.58172 14 4 16.6863 4 20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="feature-name">CallCollector</div>
-        </div>
-    </div>
-  </div>
+      <div class="hero-image">
+        <img src="/images/repai.png" alt="Recycling illustration"
+             aria-label="Image showing recycling process">
+      </div>
+    </section>
+  </main>
 </div>
