@@ -31,7 +31,7 @@ header {
   align-items: center;
   color: white;
   padding: 15px 2%;
-  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   z-index: 10;
 }
 
@@ -76,12 +76,11 @@ header {
   padding: 20px 0;
   font-size: 70px;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 .features {
   display: flex;
   flex-wrap: wrap;
-  gap: 90px;
+  gap: 70px;
   padding: 20px 0;
 }
 
@@ -106,8 +105,8 @@ header {
 }
 
 .feature-icon {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background-color: #f5f5f5;
   display: flex;
@@ -124,6 +123,15 @@ header {
 
 /* Media queries for responsiveness */
 @media screen and (max-width: 768px) {
+  .logo {
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+  }
   .container {
     padding: 0 15px;
   }
@@ -141,8 +149,10 @@ header {
 
 @media screen and (max-width: 480px) {
   .features {
-    gap: 15px;
+    gap: 1px;
     justify-content: space-between;
+    padding: 0 5%;
+    margin: 30px 0;
   }
 
   .feature {
@@ -252,4 +262,152 @@ header {
 
 .mobile-menu-overlay.show {
   display: block;
+}
+/* Enhanced offer-slider styles */
+.offer-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px 0;
+  margin: 20px 0;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.offer-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.offer-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  min-width: 280px;
+  text-align: left;
+  transition: all 0.3s ease;
+  scroll-snap-align: start;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, #555, #000);
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.offer-card h3 {
+  margin: 0 0 15px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+}
+
+.offer-card p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.offer-card button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.offer-card button:hover {
+  background: #333;
+  transform: scale(1.02);
+}
+
+.offer-tag {
+  position: absolute;
+  top: 15px;
+  right: -30px;
+  background: #000;
+  color: white;
+  transform: rotate(45deg);
+  padding: 5px 35px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .offer-slider {
+    padding: 15px 0;
+    gap: 15px;
+  }
+
+  .offer-card {
+    min-width: 250px;
+    padding: 20px 15px;
+  }
+
+  .offer-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .offer-card p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .offer-card button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .offer-slider {
+    gap: 12px;
+    padding: 10px 0;
+    margin: 15px 0;
+  }
+
+  .offer-card {
+    min-width: 85%;
+    padding: 18px 12px;
+  }
+
+  .container .offer-slider {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 5px;
+    width: calc(100% + 30px);
+  }
 }

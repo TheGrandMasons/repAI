@@ -39,6 +39,6 @@ export class ScannerComponent  {
 
   submitPhoto() {
     console.log('Submitting photo:', this.capturedImage);
-    // TODO: Send this to the Go backend when ready
+    
   }
 }
