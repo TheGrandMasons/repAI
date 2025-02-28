@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { provideHttpClient, HttpClientModule } from '@angular/common/http';
+import { inject } from '@angular/core';
 
 // Define the User interface
 interface User {
@@ -20,11 +22,11 @@ interface PendingItem {
   providedIn: 'root'
 })
 export class CashbackService {
-  private geminiApiUrl = 'http://localhost:8080/api/process-image'; // Replace with your Go backend URL
+  private geminiApiUrl = 'http://placeholder-backend-url/api/process-image'; // Placeholder Backend URL
+  private http = inject(HttpClient); // Angular inject method
 
   constructor(
-    private firestore: AngularFirestore,
-    private http: HttpClient
+    private firestore: AngularFirestore
   ) {}
 
   /**
@@ -50,13 +52,13 @@ export class CashbackService {
   }
 
   /**
-   * Process an image using the Google Gemini API
+   * Process an image using the Google Gemini API (Placeholder API Call)
    * @param imageData - Base64 encoded image data
    * @returns Observable of the recyclable type
    */
   processImage(imageData: string): Observable<string> {
     return this.http.post<{ recyclableType: string }>(this.geminiApiUrl, { image: imageData }).pipe(
-      map(response => response.recyclableType)
+      map(response => response.recyclableType || 'Placeholder Recyclable Type')
     );
   }
 
@@ -79,25 +81,18 @@ export class CashbackService {
    */
   confirmPendingItem(userId: string, itemId: string): Promise<void> {
     return this.firestore.firestore.runTransaction(async (transaction) => {
-      // Get the pending item
       const itemRef = this.firestore.doc<PendingItem>(`users/${userId}/pendingItems/${itemId}`).ref;
       const itemDoc = await transaction.get(itemRef);
       if (!itemDoc.exists) {
         throw new Error('Item not found');
       }
-
-      // Get the user's current balance
       const userRef = this.firestore.doc<User>(`users/${userId}`).ref;
       const userDoc = await transaction.get(userRef);
       const currentBalance = userDoc.data()?.balance || 0;
-
-      // Update the user's balance
-      const itemData = itemDoc.data() as PendingItem; // Explicitly type itemData
+      const itemData = itemDoc.data() as PendingItem;
       transaction.update(userRef, {
         balance: currentBalance + itemData.estimatedValue
       });
-
-      // Delete the pending item
       transaction.delete(itemRef);
     });
   }
