@@ -1,0 +1,15 @@
+<div class="camera-container">
+  <video #videoElement autoplay></video>
+  <canvas #canvasElement></canvas>
+
+  <!-- Snap Button -->
+  <button class="snap-btn" (click)="capturePhoto()">
+    <i class="fas fa-camera"></i>
+  </button>
+
+  <!-- Image Preview -->
+  <div *ngIf="capturedImage" class="preview-container">
+    <img [src]="capturedImage" alt="Captured Image" class="captured-image" />
+    <button class="submit-btn" (click)="submitPhoto()">Submit</button>
+  </div>
+</div>

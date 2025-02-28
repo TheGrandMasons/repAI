@@ -5,6 +5,8 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import firebase from 'firebase/compat/app';
+import * as firestore from 'firebase/firestore';
+import { app } from '../../environments/environment';
 import 'firebase/compat/auth';
 
 @Injectable({
@@ -28,6 +30,16 @@ export class AuthService {
       const user = credential.user;
 
       if (user) {
+        const db = firestore.getFirestore(app);
+        const userId = user.uid; 
+        const docRef = firestore.doc(db, "users", userId);
+
+        await firestore.setDoc(docRef, {
+          name: user.displayName,
+          email: user.email,
+          balance: 0
+        });
+
         const idToken = await user.getIdToken();
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', idToken);
@@ -39,13 +51,6 @@ export class AuthService {
       console.error('Google Sign-In Error:', error);
       return null;
     }
-  }
-
-  async signOut(): Promise<void> {
-    await this.afAuth.signOut();
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    this.ngZone.run(() => this.router.navigate(['/login']));
   }
 
   getCurrentUserObservable(): Observable<firebase.User | null> {
