@@ -1,48 +1,67 @@
+// src/app/services/auth.service.ts
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { User } from 'firebase/auth';
+import { map } from 'rxjs/operators';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  user$: Observable<User | null>;
+  user$: Observable<firebase.User | null>;
 
   constructor(
-    public afAuth: AngularFireAuth,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private ngZone: NgZone
   ) {
-    // Initialize user$ with the auth state observable
     this.user$ = this.afAuth.authState;
   }
 
-  googleSignIn(): Promise<User | null> {
-    return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((credential) => {
-        return credential.user;
-      })
-      .catch((error) => {
-        console.error('Google Sign-In Error:', error);
-        return null;
-      });
+  async googleSignIn(): Promise<firebase.User | null> {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const credential = await this.afAuth.signInWithPopup(provider);
+      const user = credential.user;
+
+      if (user) {
+        const idToken = await user.getIdToken();
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', idToken); // 🔥 Store JWT Token
+        console.log('JWT Token:', idToken);
+      }
+
+      return user;
+    } catch (error) {
+      console.error('Google Sign-In Error:', error);
+      return null;
+    }
   }
 
-  signOut(): Promise<void> {
-    return this.afAuth.signOut();
+  async signOut(): Promise<void> {
+    await this.afAuth.signOut();
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    this.ngZone.run(() => this.router.navigate(['/login']));
   }
 
-  getCurrentUser(): Promise<User | null> {
-    return this.afAuth.currentUser;
-  }
-
-  getCurrentUserObservable(): Observable<User | null> {
+  getCurrentUserObservable(): Observable<firebase.User | null> {
     return this.user$;
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.user$.pipe(map(user => !!user));
+    return this.user$.pipe(map((user) => !!user));
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getUserFromLocalStorage(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 }

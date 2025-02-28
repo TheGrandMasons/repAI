@@ -1,52 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { CashbackService } from '../../services/cashback.service';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
-  standalone: true, // Mark as standalone
-  imports: [CommonModule], // Add CommonModule
+  standalone: true,
+  imports: [CommonModule], // No HttpClientModule needed here anymore
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  cashbackBalance: number = 0; // User's current cashback balance
-  expectedCashback: number = 0; // Estimated cashback from scanned items
-  loading: boolean = true; // Loading state
-  userId: string = ''; // Current user ID
+  loading = true;
+  userId = '';
 
   constructor(
     private authService: AuthService,
-    private cashbackService: CashbackService,
     private router: Router
   ) {}
 
   ngOnInit() {
     // Subscribe to the authenticated user
     this.authService.user$.subscribe(user => {
+      this.loading = false;
       if (user) {
-        this.userId = user.uid; // Store the user ID
-        this.loadUserData(user.uid); // Load user data
+        this.userId = user.uid;
       }
-    });
-  }
-
-  /**
-   * Load user data from Firestore
-   * @param userId - The ID of the current user
-   */
-  loadUserData(userId: string) {
-    // Get current cashback balance
-    this.cashbackService.getCurrentBalance(userId).subscribe((balance: number) => {
-      this.cashbackBalance = balance;
-      this.loading = false; // Stop loading
-    });
-
-    // Get expected cashback (from pending scanned items)
-    this.cashbackService.getExpectedCashback(userId).subscribe((expected: number) => {
-      this.expectedCashback = expected;
     });
   }
 

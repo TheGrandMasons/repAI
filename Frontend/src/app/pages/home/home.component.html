@@ -1,23 +1,13 @@
+<!-- Show a loading spinner while user info is loading -->
 <div *ngIf="loading" class="flex justify-center items-center h-screen">
-  <!-- Loading spinner -->
   <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
 </div>
 
+<!-- Main content after loading finishes -->
 <div *ngIf="!loading" class="p-6 bg-gray-50 min-h-screen">
-  <!-- Cashback Balance Section -->
-  <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
-    <h2 class="text-gray-500 text-sm font-medium mb-2">Your Cashback Balance</h2>
-    <p class="text-4xl font-bold text-primary">{{ cashbackBalance | currency:'EGP ' }}</p>
-  </div>
+  <h1 class="text-xl font-bold mb-4">Welcome Home!</h1>
 
-  <!-- Expected Cashback Section -->
-  <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
-    <h3 class="text-gray-500 text-sm font-medium mb-2">Expected Cashback</h3>
-    <p class="text-3xl font-bold text-secondary">{{ expectedCashback | currency:'EGP ' }}</p>
-    <p class="text-gray-400 text-sm mt-2">This is the estimated cashback from your scanned items.</p>
-  </div>
-
-  <!-- Scan New Item Button -->
+  <!-- Button to go to Scanner -->
   <div class="mb-6">
     <button
       (click)="navigateToScanner()"
@@ -28,7 +18,7 @@
     </button>
   </div>
 
-  <!-- Manage Categories Button -->
+  <!-- Button to go to Categories -->
   <div>
     <button
       (click)="navigateToCategories()"
