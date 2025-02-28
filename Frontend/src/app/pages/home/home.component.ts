@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { setDoc , addDoc , doc ,getFirestore ,collection } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +21,8 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
-
+  app = initializeApp(environment.firebase);
+  db = getFirestore(this.app);
   ngOnInit() {
     // Subscribe to the authenticated user
     this.authService.user$.subscribe(user => {
@@ -53,6 +57,14 @@ export class HomeComponent implements OnInit {
     if (window.innerWidth < 768 && this.menuOpen) {
       // Auto-close menu when resizing to larger screens
       this.menuOpen = false;
+    }
+  }
+  addDocToFirestore() {
+    try {
+      const usersCollection = collection(this.db, "users");
+      addDoc(usersCollection, { user: "sherif" });
+    } catch(e) {
+      console.error("error: ", e);
     }
   }
 }

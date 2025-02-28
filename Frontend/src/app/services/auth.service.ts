@@ -30,7 +30,7 @@ export class AuthService {
       if (user) {
         const idToken = await user.getIdToken();
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', idToken); // 🔥 Store JWT Token
+        localStorage.setItem('token', idToken);
         console.log('JWT Token:', idToken);
       }
 
