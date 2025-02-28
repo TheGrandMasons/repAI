@@ -1,61 +1,67 @@
 <div class="scanner-container">
   <h2>Scan Recyclable Items</h2>
-  
+
   <!-- Error message display -->
   <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-    <button *ngIf="errorMessage.includes('camera')" (click)="retryCamera()">Retry Camera</button>
+    <span>{{ errorMessage }}</span>
+    <button *ngIf="errorMessage.includes('camera')" (click)="retryCamera()">
+      <span>Retry Camera</span>
+    </button>
   </div>
-  
+
   <!-- Camera feed -->
-  <div class="camera-container">
-    <video #videoElement autoplay playsinline class="camera-feed"></video>
+  <div class="camera-container" [class.has-image]="capturedImage">
+    <video #videoElement autoplay playsinline class="camera-feed" [class.hidden]="capturedImage"></video>
     <canvas #canvasElement class="hidden-canvas"></canvas>
-    
+
     <!-- Loading indicator -->
     <div *ngIf="isLoading" class="loading-overlay">
       <div class="loading-spinner"></div>
       <p>Analyzing image...</p>
     </div>
   </div>
-  
+
   <!-- Controls -->
   <div class="controls">
     <button (click)="capturePhoto()" [disabled]="isLoading" class="capture-btn">
-      {{ capturedImage ? 'Retake Photo' : 'Take Photo' }}
+      <span>{{ capturedImage ? 'Retake Photo' : 'Take Photo' }}</span>
     </button>
-    
-    <button 
-      *ngIf="capturedImage" 
-      (click)="submitPhoto()" 
-      [disabled]="isLoading" 
+
+    <button
+      *ngIf="capturedImage"
+      (click)="submitPhoto()"
+      [disabled]="isLoading"
       class="submit-btn">
-      Submit
+      <span>Analyze Item</span>
     </button>
   </div>
-  
+
   <!-- Image preview -->
   <div *ngIf="capturedImage" class="image-preview">
     <img [src]="capturedImage" alt="Captured image" />
   </div>
-  
+
   <!-- Results popup -->
   <div *ngIf="showPopup" class="popup-overlay">
     <div class="popup-content">
       <h3>Recyclable Items Detected!</h3>
-      
+
       <div class="recyclables-list">
         <p *ngIf="recyclableItems.length === 0">No recyclable items detected.</p>
         <ul *ngIf="recyclableItems.length > 0">
-          <li *ngFor="let item of recyclableItems">{{ item | titlecase }}</li>
+          <li *ngFor="let item of recyclableItems; let i = index" [style.--index]="i">
+            {{ item | titlecase }}
+          </li>
         </ul>
       </div>
-      
+
       <div class="cashback-info">
         <p>You earned: <strong>${{ cashbackEstimate?.toFixed(2) }}</strong> cashback!</p>
       </div>
-      
-      <button (click)="closePopup()" class="close-btn">Scan Another Item</button>
+
+      <button (click)="closePopup()" class="close-btn">
+        <span>Scan Another Item</span>
+      </button>
     </div>
   </div>
 </div>
