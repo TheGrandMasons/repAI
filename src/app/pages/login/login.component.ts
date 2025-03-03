@@ -1,4 +1,3 @@
-// src/app/pages/login/login.component.ts
 import { Component ,HostListener, ElementRef  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -44,8 +43,6 @@ export class LoginComponent {
         this.loginError = 'An error occurred. Please check your connection and try again.';
       });
   }
-
-
 
 
     // Navigation links (not used in the current implementation but kept for reference)
@@ -104,22 +101,17 @@ export class LoginComponent {
       }
     }
 
-    // Close mobile menu when clicking on a link
     closeMenu(): void {
       this.isMenuOpen = false;
     }
 
-    // Example method for handling login/signup actions
     onLoginClick(): void {
-      // Implement login logic
       console.log('Login clicked');
     }
 
     onSignupClick(): void {
-      // Implement signup logic
       console.log('Signup clicked');
     }
-    // Add this method to RepaiLandingPageComponent
     closeDropdown(): void {
       this.isDropdownOpen = false;
     }

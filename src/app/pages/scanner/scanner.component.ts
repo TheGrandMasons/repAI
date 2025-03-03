@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
-import { app } from '../../../environments/environment';
+import { app } from '../../../firebase/firebase';
 
 interface UserData {
   cashback?: number;
