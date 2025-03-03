@@ -48,6 +48,7 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 
+/src/firebase/env.ts
 *.env
 /Backend/envs.json
 *.lock
