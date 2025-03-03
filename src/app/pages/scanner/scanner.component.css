@@ -1,0 +1,359 @@
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #121212, #1a1a1a);
+  min-height: 100vh;
+}
+
+/* Scanner Container */
+.scanner-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* Error message */
+.error-message {
+  background-color: rgba(255, 87, 87, 0.2);
+  border-left: 4px solid #ff5757;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.error-message button {
+  margin-left: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+/* Camera Feed */
+.camera-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.camera-feed {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.hidden-canvas {
+  display: none;
+}
+
+/* Loading Indicator */
+.loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  animation: pulse 2s infinite;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #007bff;
+  border-right: 4px solid #00c6ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.7; }
+}
+
+/* Controls */
+.controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0056b3, #003d82);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.capture-btn {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #00c853, #009624);
+}
+
+.close-btn {
+  background: linear-gradient(135deg, #6200ea, #3700b3);
+}
+
+/* Button ripple effect */
+button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Image Preview */
+.image-preview {
+  margin-top: 25px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.image-preview img {
+  max-width: 300px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.image-preview img:hover {
+  transform: scale(1.02);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  backdrop-filter: blur(5px);
+  transition: all 0.4s ease;
+  animation: fadeIn 0.5s ease-in-out forwards;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: rgba(40, 44, 52, 0.9);
+  backdrop-filter: blur(20px);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  max-width: 90%;
+  width: 400px;
+  transform: scale(0.95);
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Popup content */
+.popup-content h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.recyclables-list {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.recyclables-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recyclables-list li {
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  animation: slideIn 0.4s ease-out forwards;
+  animation-delay: calc(0.1s * var(--index, 0));
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.recyclables-list li::before {
+  content: "♻️";
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cashback-info {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
+  padding: 15px;
+  border-radius: 12px;
+  margin: 20px 0;
+  border-left: 3px solid #4caf50;
+}
+
+.cashback-info p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.cashback-info strong {
+  font-size: 24px;
+  color: #4caf50;
+  font-weight: 700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .camera-container {
+    height: 50vh;
+  }
+
+  button {
+    padding: 12px 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .image-preview img {
+    max-width: 90%;
+  }
+
+  .popup-content {
+    padding: 20px;
+    width: 85%;
+  }
+}

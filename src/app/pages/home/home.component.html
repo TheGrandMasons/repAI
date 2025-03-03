@@ -1,0 +1,87 @@
+<div class="home">
+  <header>
+      <div class="logo">Repai</div>
+      <div class="user">
+          <div class="username">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-at-sign"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
+            <span class="username-text">{{username}}</span>
+          </div>
+          <div class="more-options" (click)="toggleMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </div>
+      </div>
+  </header>
+
+  <div class="mobile-menu" [class.show]="menuOpen">
+    <div class="mobile-menu-item" style="color: red;">Logout</div>
+  </div>
+
+  <div class="container">
+    <div class="balance-container">
+        <div><span>EGP</span> {{balance}} </div>
+        <!-- <div><span>EGP</span> {{balance}} </div> -->
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon scanner" (click)="navigateToScanner()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scan-line"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>
+            </div>
+            <div class="feature-name">scanner</div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="black" stroke-width="2"/>
+                    <path d="M12 7V12L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="feature-name">History</div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 9.5L6 17" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 7L12 17" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M18 12L18 17" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="feature-name">insights</div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 20C20 16.6863 16.4183 14 12 14C7.58172 14 4 16.6863 4 20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="feature-name">CallCollector</div>
+        </div>
+    </div>
+    <!-- card section -->
+    <!-- Enhanced card section -->
+<div class="offer-slider">
+  <div class="offer-card">
+    <div class="offer-tag">New</div>
+    <h3>Exclusive Deal</h3>
+    <p>Get 20% cashback on your next transaction when you use our scanner feature.</p>
+    <button>Claim Now</button>
+  </div>
+  <div class="offer-card">
+    <div class="offer-tag">Limited</div>
+    <h3>Refer & Earn</h3>
+    <p>Refer a friend and earn EGP 50 when they complete their first transaction.</p>
+    <button>Refer Now</button>
+  </div>
+  <div class="offer-card">
+    <h3>Weekend Special</h3>
+    <p>Earn double points on every purchase this weekend. Valid until Sunday midnight.</p>
+    <button>Activate</button>
+  </div>
+  
+</div>
+  </div>
+</div>

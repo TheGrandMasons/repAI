@@ -51,7 +51,6 @@ RepAi is an AI-driven web application that incentivizes recycling by providing r
 Follow these steps to set up and run the project locally.
 
 ### **Prerequisites**
-- Node.js (v16 or higher)  
 - Go (v1.20 or higher)  
 - Angular CLI (v15 or higher)  
 - Firebase CLI  
