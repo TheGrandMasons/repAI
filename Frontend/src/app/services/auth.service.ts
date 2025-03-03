@@ -37,7 +37,7 @@ export class AuthService {
         await firestore.setDoc(docRef, {
           name: user.displayName,
           email: user.email,
-          balance: 0
+          balance: 56
         });
 
         const idToken = await user.getIdToken();
